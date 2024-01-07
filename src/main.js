@@ -6,7 +6,6 @@ import "izitoast/dist/css/iziToast.min.css";
 
 const form = document.querySelector(".form");
 const gallery = document.querySelector(".gallery");
-const textInput = document.querySelector('.text-input')
 const loader = document.querySelector('.loader');
 
 // Використання галереї SimpleLightbox(Зображення відкриваються як модальне вікно)
@@ -35,10 +34,12 @@ function fetchImages(event) {
     event.preventDefault();
     // відміняємо приховування loader
     loader.style.display = 'block';
+     gallery.innerHTML = '';
     // Створення параметрів пошуку Pixabay
+    const searchQueries = event.target.elements.search.value;
     const searchParams = new URLSearchParams({
         key: '41488002-513c6a9a4c115eae6a99045d3',
-        q: textInput.value ,
+        q: searchQueries,
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
@@ -53,7 +54,9 @@ function fetchImages(event) {
         .then((data) => {
             // (Якщо data.hits.length дорівнює 0, це означає, що у відповіді немає зображень)
             if (data.hits.length === 0) {
+                 gallery.innerHTML = '';
                 return showMessage();
+
             }
             const renderImg = data.hits.reduce((html, image) => {
                 return html + imageCard(image);
