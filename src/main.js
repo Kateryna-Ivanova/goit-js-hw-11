@@ -38,7 +38,7 @@ function fetchImages(event) {
     // Створення параметрів пошуку Pixabay
     const searchQueries = event.target.elements.search.value;
     const searchParams = new URLSearchParams({
-        key: '41488002-513c6a9a4c115eae6a99045d3',
+        key: '41659492-ec5a278d39a7ff9431707ab98',
         q: searchQueries,
         image_type: 'photo',
         orientation: 'horizontal',
